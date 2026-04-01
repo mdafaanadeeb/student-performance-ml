@@ -6,29 +6,29 @@ from model import load_model
 from utils import preprocess_input, analyze_performance, generate_recommendations, create_study_plan, future_guidance
 
 # -------------------- PAGE CONFIG --------------------
-st.set_page_config(page_title="AI Student Mentor", layout="wide")
+st.set_page_config(page_title="Student Performance System", layout="wide")
 
 # -------------------- CUSTOM CSS --------------------
 st.markdown("""
 <style>
-/* Background */
 .stApp {
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
 }
 
-/* Title */
 h1, h2, h3 {
     color: #ffffff;
 }
 
 /* Card Style */
-.card {
-    background-color: rgba(255, 255, 255, 0.08);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    margin-bottom: 20px;
+.block-container {
+    padding-top: 2rem;
+}
+
+[data-testid="stMetric"] {
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 12px;
 }
 
 /* Sidebar */
@@ -45,18 +45,16 @@ section[data-testid="stSidebar"] {
     font-weight: bold;
 }
 
-/* Metric */
-[data-testid="stMetric"] {
-    background-color: rgba(255,255,255,0.1);
-    padding: 15px;
-    border-radius: 12px;
+/* Text */
+p, label {
+    color: #ffffff !important;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # -------------------- HEADER --------------------
-st.markdown("<h1 style='text-align:center;'>🎓 AI Student Performance Mentor</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center;'>Your personal academic improvement assistant 🚀</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;'>🎓 Student Performance Prediction System</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center;'>Personalized Academic Analysis & Improvement Guidance</p>", unsafe_allow_html=True)
 
 # -------------------- LOAD MODEL --------------------
 reg, clf, metrics = load_model()
@@ -92,16 +90,16 @@ if st.sidebar.button("🚀 Predict Performance"):
     plan = create_study_plan(study_time)
 
     # -------------------- WELCOME --------------------
-    st.success(f"✨ Welcome {name}! Let's improve your performance step by step.")
+    st.success(f"Analysis Generated Successfully")
 
     # -------------------- METRICS --------------------
     col1, col2, col3 = st.columns(3)
 
     col1.metric("📊 Predicted Marks", f"{pred_marks:.2f}")
-    col2.metric("🎯 Grade", pred_grade)
-    col3.metric("📉 Gap", f"{gap:.2f}")
+    col2.metric("🎯 Predicted Grade", pred_grade)
+    col3.metric("📉 Performance Gap", f"{gap:.2f}")
 
-    # -------------------- PROGRESS BAR --------------------
+    # -------------------- PROGRESS --------------------
     progress = int((pred_marks / target) * 100) if target != 0 else 0
     st.progress(min(progress, 100))
 
@@ -109,10 +107,14 @@ if st.sidebar.button("🚀 Predict Performance"):
     st.markdown("### 📈 Performance Overview")
 
     fig, ax = plt.subplots()
-    ax.bar(["Past", "Predicted", "Target"], [past_marks, pred_marks, target],
-           color=["#ff4b4b", "#00c6ff", "#00ff94"])
+    ax.bar(
+        ["Past", "Predicted", "Target"],
+        [past_marks, pred_marks, target],
+        color=["#ff4b4b", "#00c6ff", "#00ff94"]
+    )
     ax.set_ylabel("Marks")
     ax.set_title("Performance Comparison")
+
     st.pyplot(fig)
 
     # -------------------- WEAK AREAS --------------------
@@ -120,7 +122,7 @@ if st.sidebar.button("🚀 Predict Performance"):
     st.write(difficult if difficult else "None")
 
     # -------------------- RECOMMENDATIONS --------------------
-    st.markdown("### 🤝 Mentor Advice")
+    st.markdown("### 🤝 Recommendations")
     for r in recs:
         st.markdown(f"- {r}")
 
@@ -132,10 +134,6 @@ if st.sidebar.button("🚀 Predict Performance"):
     st.markdown("### 🚀 Future Guidance")
     st.info(future_guidance(pred_marks, target))
 
-    # -------------------- METRICS --------------------
+    # -------------------- MODEL METRICS --------------------
     st.markdown("### 📊 Model Performance")
     st.write(metrics)
-
-# -------------------- FOOTER --------------------
-st.markdown("---")
-st.markdown("<p style='text-align:center;'>Developed by <b>Your Name</b> 🚀</p>", unsafe_allow_html=True)
