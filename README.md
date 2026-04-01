@@ -1,25 +1,20 @@
-# 🎓 Student Performance Prediction ML System
+# 🎓 Student Performance Prediction System (ML)
 
-## Run Locally
+A Machine Learning-based web app that predicts student marks & grades and provides personalized study guidance.
 
-pip install -r requirements.txt  
-streamlit run app.py  
+## 🚀 Features
+- 📊 Marks Prediction (Regression)
+- 🎯 Grade Prediction (A/B/C/D)
+- 📉 Performance Gap Analysis
+- ⚠️ Weak Area Identification
+- 💡 Mentor-style Recommendations
+- 📅 Personalized Study Plan
+- 📊 Interactive Dashboard (Streamlit)
 
-## Deploy
+## 🧠 Tech Stack
+Python • Streamlit • Scikit-learn • Pandas • NumPy • Plotly
 
-1. Upload to GitHub  
-2. Go to Streamlit Cloud  
-3. Select repo  
-4. Deploy  
-
-## Features
-
-- ML Prediction
-- Mentor Advice
-- Future Guidance
-- Study Plan
-- Visualization
-
-## Disclaimer
-
-Uses synthetic data. Not 100% accurate.
+## ▶️ Run Locally
+```bash
+pip install -r requirements.txt
+streamlit run app.py
