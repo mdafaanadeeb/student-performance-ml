@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import matplotlib.pyplot as plt
 
 from model import load_model
 from utils import preprocess_input, analyze_performance, generate_recommendations, create_study_plan, future_guidance
@@ -50,14 +50,12 @@ if st.sidebar.button("Predict"):
     st.subheader("📉 Performance Gap")
     st.write(f"{gap:.2f}")
 
-    # Chart
-    df_chart = pd.DataFrame({
-        "Type": ["Past", "Predicted", "Target"],
-        "Marks": [past_marks, pred_marks, target]
-    })
-
-    fig = px.bar(df_chart, x="Type", y="Marks", color="Type")
-    st.plotly_chart(fig)
+    # Chart using matplotlib (SAFE)
+    fig, ax = plt.subplots()
+    ax.bar(["Past", "Predicted", "Target"], [past_marks, pred_marks, target])
+    ax.set_ylabel("Marks")
+    ax.set_title("Performance Comparison")
+    st.pyplot(fig)
 
     st.subheader("⚠️ Weak Areas")
     st.write(difficult if difficult else "None")
