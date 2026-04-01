@@ -15,6 +15,6 @@ A Machine Learning-based web app that predicts student marks & grades and provid
 Python • Streamlit • Scikit-learn • Pandas • NumPy • Plotly
 
 ## ▶️ Run Locally
-```bash
+```bash 
 pip install -r requirements.txt
 streamlit run app.py
