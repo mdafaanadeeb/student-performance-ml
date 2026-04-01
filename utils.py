@@ -15,29 +15,29 @@ def generate_recommendations(gap, difficult, easy, study_time, free_time):
     recs = []
 
     if gap > 15:
-        recs.append("🚨 You are significantly below your target. Let’s improve step by step.")
+        recs.append("🚨 You are far from your target. Start improving step by step.")
     elif gap > 5:
-        recs.append("⚠️ You are close to your goal, but need consistency.")
+        recs.append("⚠️ You are close to your goal. Stay consistent.")
     else:
-        recs.append("🎉 Great! You're on track. Keep it up!")
+        recs.append("🎉 Great! You are on track!")
 
     if study_time < 3:
         recs.append("Increase your daily study time gradually.")
     else:
-        recs.append("Your study time is good. Focus on quality learning.")
+        recs.append("Your study time is good. Focus on quality.")
 
-    recs.append("❗ Avoid excessive free time.")
-    recs.append("❗ Do not skip revision.")
-    recs.append("❗ Avoid last-minute cramming.")
+    recs.append("❗ Avoid too much free time.")
+    recs.append("❗ Revise regularly.")
+    recs.append("❗ Avoid last-minute study.")
 
     if difficult:
-        recs.append(f"📉 Focus on difficult subjects: {difficult}")
+        recs.append(f"📉 Focus on: {difficult}")
 
     if easy:
-        recs.append(f"📈 Use strengths in: {easy}")
+        recs.append(f"📈 Strengths: {easy}")
 
-    recs.append("🧠 Use practice tests and active recall.")
-    recs.append("🤝 You're not alone. Small daily progress matters.")
+    recs.append("🧠 Practice tests weekly.")
+    recs.append("🤝 You can improve with consistency.")
 
     return recs
 
@@ -45,30 +45,30 @@ def generate_recommendations(gap, difficult, easy, study_time, free_time):
 def future_guidance(predicted_marks, target):
     if predicted_marks < target:
         return """
-📌 Future Growth Plan:
-- Improve weak subjects step by step
+📌 Improve Gradually:
+- Focus on weak subjects
 - Track weekly progress
-- Take mock tests regularly
+- Take mock tests
 - Stay consistent
 
-🚀 You can reach your goal!
+🚀 You can achieve your goal!
 """
     else:
         return """
-🌟 Excellence Plan:
-- Maintain consistency
+🌟 Keep Improving:
+- Maintain routine
 - Practice advanced questions
 - Help others learn
 
-🎯 Aim even higher!
+🎯 Aim higher!
 """
 
 
 def create_study_plan(study_time):
     return f"""
 Daily Plan:
-- {study_time} hrs focused study
+- {study_time} hrs study
 - 1 hr revision
-- 30 min practice tests
+- 30 min practice
 - Break every 1 hour
 """
